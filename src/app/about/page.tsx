@@ -11,11 +11,23 @@ import {
   Meta,
   Schema,
   Row,
+  SmartLink,
 } from "@once-ui-system/core";
 import { baseURL, about, person, social } from "@/resources";
 import TableOfContents from "@/components/about/TableOfContents";
+import { ScrollToHash } from "@/components";
+import { ProjectCard } from "@/components";
+import { getPosts } from "@/utils/utils";
 import styles from "@/components/about/about.module.scss";
 import React from "react";
+
+const sectionIds = {
+  intro: "about",
+  work: "experience",
+  projects: "projects",
+  technical: "skills",
+  studies: "education",
+};
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -28,26 +40,40 @@ export async function generateMetadata() {
 }
 
 export default function About() {
+  const projects = getPosts(["src", "app", "work", "projects"]).sort((a, b) => {
+    return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
+  });
+
   const structure = [
     {
+      id: sectionIds.intro,
       title: about.intro.title,
       display: about.intro.display,
       items: [],
     },
     {
+      id: sectionIds.work,
       title: about.work.title,
       display: about.work.display,
       items: about.work.experiences.map((experience) => experience.company),
     },
     {
-      title: about.studies.title,
-      display: about.studies.display,
-      items: about.studies.institutions.map((institution) => institution.name),
+      id: sectionIds.projects,
+      title: "Projects",
+      display: projects.length > 0,
+      items: projects.map((project) => project.metadata.title),
     },
     {
+      id: sectionIds.technical,
       title: about.technical.title,
       display: about.technical.display,
       items: about.technical.skills.map((skill) => skill.title),
+    },
+    {
+      id: sectionIds.studies,
+      title: about.studies.title,
+      display: about.studies.display,
+      items: about.studies.institutions.map((institution) => institution.name),
     },
   ];
   return (
@@ -96,7 +122,7 @@ export default function About() {
             <Avatar src={person.avatar} size="xl" />
             <Row gap="8" vertical="center">
               <Icon onBackground="accent-weak" name="globe" />
-              {person.location}
+              {person.locationLabel || person.location}
             </Row>
             {person.languages && person.languages.length > 0 && (
               <Row wrap gap="8">
@@ -111,7 +137,7 @@ export default function About() {
         )}
         <Column className={styles.blockAlign} flex={9} maxWidth={40}>
           <Column
-            id={about.intro.title}
+            id={sectionIds.intro}
             fillWidth
             minHeight="160"
             vertical="center"
@@ -204,16 +230,41 @@ export default function About() {
 
           {about.work.display && (
             <>
-              <Heading as="h2" id={about.work.title} variant="display-strong-s" marginBottom="m">
+              <Heading as="h2" id={sectionIds.work} variant="display-strong-s" marginBottom="m">
+                <span id={sectionIds.work} />
                 {about.work.title}
               </Heading>
               <Column fillWidth gap="l" marginBottom="40">
                 {about.work.experiences.map((experience, index) => (
                   <Column key={`${experience.company}-${experience.role}-${index}`} fillWidth>
                     <Row fillWidth horizontal="between" vertical="end" marginBottom="4">
-                      <Text id={experience.company} variant="heading-strong-l">
-                        {experience.company}
-                      </Text>
+                      <Row id={experience.company} gap="12" vertical="center">
+                        {experience.logo && (
+                          <Row
+                            border="neutral-alpha-weak"
+                            radius="m"
+                            background="page"
+                            width="40"
+                            height="40"
+                            padding="4"
+                            vertical="center"
+                            horizontal="center"
+                          >
+                            <Media
+                              sizes="40px"
+                              alt={`${experience.company} logo`}
+                              src={experience.logo}
+                            />
+                          </Row>
+                        )}
+                        {experience.website ? (
+                          <SmartLink href={experience.website}>
+                            <Text variant="heading-strong-l">{experience.company}</Text>
+                          </SmartLink>
+                        ) : (
+                          <Text variant="heading-strong-l">{experience.company}</Text>
+                        )}
+                      </Row>
                       <Text variant="heading-default-xs" onBackground="neutral-weak">
                         {experience.timeframe}
                       </Text>
@@ -261,21 +312,24 @@ export default function About() {
             </>
           )}
 
-          {about.studies.display && (
+          {projects.length > 0 && (
             <>
-              <Heading as="h2" id={about.studies.title} variant="display-strong-s" marginBottom="m">
-                {about.studies.title}
+              <Heading as="h2" id={sectionIds.projects} variant="display-strong-s" marginBottom="m">
+                Projects
               </Heading>
-              <Column fillWidth gap="l" marginBottom="40">
-                {about.studies.institutions.map((institution, index) => (
-                  <Column key={`${institution.name}-${index}`} fillWidth gap="4">
-                    <Text id={institution.name} variant="heading-strong-l">
-                      {institution.name}
-                    </Text>
-                    <Text variant="heading-default-xs" onBackground="neutral-weak">
-                      {institution.description}
-                    </Text>
-                  </Column>
+              <Column fillWidth gap="xl" marginBottom="40">
+                {projects.map((project, index) => (
+                  <ProjectCard
+                    key={project.slug}
+                    priority={index < 2}
+                    href=""
+                    images={project.metadata.images}
+                    title={project.metadata.title}
+                    description={project.metadata.summary}
+                    content=""
+                    avatars={project.metadata.team?.map((member) => ({ src: member.avatar })) || []}
+                    link={project.metadata.link || ""}
+                  />
                 ))}
               </Column>
             </>
@@ -285,7 +339,7 @@ export default function About() {
             <>
               <Heading
                 as="h2"
-                id={about.technical.title}
+                id={sectionIds.technical}
                 variant="display-strong-s"
                 marginBottom="40"
               >
@@ -335,8 +389,57 @@ export default function About() {
               </Column>
             </>
           )}
+
+          {about.studies.display && (
+            <>
+              <Heading as="h2" id={sectionIds.studies} variant="display-strong-s" marginBottom="m">
+                {about.studies.title}
+              </Heading>
+              <Column fillWidth gap="l" marginBottom="40">
+                {about.studies.institutions.map((institution, index) => (
+                  <Column key={`${institution.name}-${index}`} fillWidth gap="4">
+                    <Row gap="12" vertical="center">
+                      {institution.logo && (
+                        <Row
+                          border="neutral-alpha-weak"
+                          radius="m"
+                          background="page"
+                          width="40"
+                          height="40"
+                          padding="4"
+                          vertical="center"
+                          horizontal="center"
+                        >
+                          <Media
+                            sizes="40px"
+                            alt={`${institution.name} logo`}
+                            src={institution.logo}
+                          />
+                        </Row>
+                      )}
+                      {institution.website ? (
+                        <SmartLink href={institution.website}>
+                          <Text id={institution.name} variant="heading-strong-l">
+                            {institution.name}
+                          </Text>
+                        </SmartLink>
+                      ) : (
+                        <Text id={institution.name} variant="heading-strong-l">
+                          {institution.name}
+                        </Text>
+                      )}
+                    </Row>
+                    <Text variant="heading-default-xs" onBackground="neutral-weak">
+                      {institution.description}
+                    </Text>
+                  </Column>
+                ))}
+              </Column>
+            </>
+          )}
         </Column>
       </Row>
+      <ScrollToHash />
     </Column>
   );
 }

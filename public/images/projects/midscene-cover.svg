@@ -1,0 +1,13 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#09090B"/>
+  <circle cx="302" cy="172" r="220" fill="#3F3F46" fill-opacity="0.28"/>
+  <rect x="74" y="74" width="1452" height="752" rx="36" fill="#18181B" stroke="#27272A" stroke-width="2"/>
+  <text x="128" y="250" fill="white" font-family="Arial, sans-serif" font-size="82" font-weight="700">Midscene Contribution</text>
+  <text x="128" y="322" fill="#D4D4D8" font-family="Arial, sans-serif" font-size="34">Open-source fixes for AI-powered, vision-driven UI automation</text>
+  <text x="128" y="406" fill="#A1A1AA" font-family="Arial, sans-serif" font-size="28">Security hardening • Report performance • Desktop automation safety</text>
+  <rect x="128" y="498" width="1338" height="192" rx="28" fill="#111113" stroke="#3F3F46"/>
+  <rect x="182" y="556" width="328" height="28" rx="14" fill="#3F3F46"/>
+  <rect x="182" y="612" width="862" height="20" rx="10" fill="#27272A"/>
+  <rect x="1126" y="548" width="286" height="88" rx="20" fill="#18181B" stroke="#52525B"/>
+  <text x="1174" y="604" fill="#F4F4F5" font-family="Arial, sans-serif" font-size="26">12.7k stars project</text>
+</svg>

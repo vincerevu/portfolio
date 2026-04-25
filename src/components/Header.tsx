@@ -44,6 +44,15 @@ export default TimeDisplay;
 
 export const Header = () => {
   const pathname = usePathname() ?? "";
+  const [currentHash, setCurrentHash] = useState("");
+  const isProfilePage = pathname === "/" || pathname === "/about";
+
+  useEffect(() => {
+    const updateHash = () => setCurrentHash(window.location.hash);
+    updateHash();
+    window.addEventListener("hashchange", updateHash);
+    return () => window.removeEventListener("hashchange", updateHash);
+  }, []);
 
   return (
     <>
@@ -73,7 +82,7 @@ export const Header = () => {
         }}
       >
         <Row paddingLeft="12" fillWidth vertical="center" textVariant="body-default-s">
-          {display.location && <Row s={{ hide: true }}>{person.location}</Row>}
+          {display.location && <Row s={{ hide: true }}>{person.locationLabel || person.location}</Row>}
         </Row>
         <Row fillWidth horizontal="center">
           <Row
@@ -95,16 +104,54 @@ export const Header = () => {
                   <Row s={{ hide: true }}>
                     <ToggleButton
                       prefixIcon="person"
-                      href="/about"
+                      href="/#about"
                       label={about.label}
-                      selected={pathname === "/about"}
+                      selected={isProfilePage && (currentHash === "" || currentHash === "#about")}
                     />
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
                       prefixIcon="person"
-                      href="/about"
-                      selected={pathname === "/about"}
+                      href="/#about"
+                      selected={isProfilePage && (currentHash === "" || currentHash === "#about")}
+                    />
+                  </Row>
+                </>
+              )}
+              {routes["/experience"] && (
+                <>
+                  <Row s={{ hide: true }}>
+                    <ToggleButton
+                      prefixIcon="document"
+                      href="/#experience"
+                      label="Experience"
+                      selected={isProfilePage && currentHash === "#experience"}
+                    />
+                  </Row>
+                  <Row hide s={{ hide: false }}>
+                    <ToggleButton
+                      prefixIcon="document"
+                      href="/#experience"
+                      selected={isProfilePage && currentHash === "#experience"}
+                    />
+                  </Row>
+                </>
+              )}
+              {routes["/education"] && (
+                <>
+                  <Row s={{ hide: true }}>
+                    <ToggleButton
+                      prefixIcon="book"
+                      href="/#education"
+                      label="Education"
+                      selected={isProfilePage && currentHash === "#education"}
+                    />
+                  </Row>
+                  <Row hide s={{ hide: false }}>
+                    <ToggleButton
+                      prefixIcon="book"
+                      href="/#education"
+                      selected={isProfilePage && currentHash === "#education"}
                     />
                   </Row>
                 </>
@@ -114,16 +161,16 @@ export const Header = () => {
                   <Row s={{ hide: true }}>
                     <ToggleButton
                       prefixIcon="grid"
-                      href="/work"
+                      href="/#projects"
                       label={work.label}
-                      selected={pathname.startsWith("/work")}
+                      selected={isProfilePage && currentHash === "#projects"}
                     />
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
                       prefixIcon="grid"
-                      href="/work"
-                      selected={pathname.startsWith("/work")}
+                      href="/#projects"
+                      selected={isProfilePage && currentHash === "#projects"}
                     />
                   </Row>
                 </>

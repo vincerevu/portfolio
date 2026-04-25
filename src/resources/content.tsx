@@ -2,48 +2,34 @@ import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/
 import { Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
-  firstName: "Selene",
-  lastName: "Yu",
-  name: `Selene Yu`,
-  role: "Design Engineer",
-  avatar: "/images/avatar.jpg",
-  email: "example@gmail.com",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  firstName: "Vũ",
+  lastName: "Nguyễn Đức Thắng",
+  name: "Vũ Nguyễn Đức Thắng",
+  role: "Software Engineer",
+  avatar: "/images/avatar.svg",
+  email: "vndt181204@gmail.com",
+  location: "Asia/Ho_Chi_Minh",
+  locationLabel: "Thanh Xuan, Ha Noi",
+  languages: ["Vietnamese", "English"],
 };
 
 const newsletter: Newsletter = {
-  display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: <>My weekly newsletter about creativity and engineering</>,
+  display: false,
+  title: <>Stay in touch</>,
+  description: <>Reach out by email if you want to collaborate on product or AI engineering.</>,
 };
 
 const social: Social = [
-  // Links are automatically displayed.
-  // Import new icons in /once-ui/icons.ts
-  // Set essentials: true for links you want to show on the about page
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/once-ui-system",
+    link: "https://github.com/vincerevu",
     essential: true,
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
-    essential: true,
-  },
-  {
-    name: "Instagram",
-    icon: "instagram",
-    link: "https://www.instagram.com/once_ui/",
-    essential: false,
-  },
-  {
-    name: "Threads",
-    icon: "threads",
-    link: "https://www.threads.com/@once_ui",
+    link: "https://www.linkedin.com/in/thang-vu-nguyen-duc-6a1233405/",
     essential: true,
   },
   {
@@ -56,28 +42,30 @@ const social: Social = [
 
 const home: Home = {
   path: "/",
-  image: "/images/og/home.jpg",
+  image: "/images/og/home.svg",
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
+  headline: <>Building full-stack products and local-first AI workflows</>,
   featured: {
     display: true,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Once UI</strong>{" "}
+        <strong className="ml-4">Flazz</strong>{" "}
         <Line background="brand-alpha-strong" vert height="20" />
         <Text marginRight="4" onBackground="brand-medium">
-          Featured work
+          Featured project
         </Text>
       </Row>
     ),
-    href: "/work/building-once-ui-a-customizable-design-system",
+    href: "/work/flazz-local-first-ai-desktop-coworker",
   },
   subline: (
     <>
-    I'm Selene, a design engineer at <Text as="span" size="xl" weight="strong">ONCE UI</Text>, where I craft intuitive <br /> user experiences. After hours, I build my own projects.
-</>
+      I am a software engineer focused on React.js, Spring Boot, NestJS, and PostgreSQL,
+      building business systems and AI-assisted tools with strong backend foundations and
+      practical automation.
+    </>
   ),
 };
 
@@ -94,60 +82,81 @@ const about: About = {
     display: true,
   },
   calendar: {
-    display: true,
-    link: "https://cal.com",
+    display: false,
+    link: "",
   },
   intro: {
     display: true,
-    title: "Introduction",
+    title: "Professional Summary",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
-        into simple, elegant design solutions. Her work spans digital interfaces, interactive
-        experiences, and the convergence of design and technology.
+        Software engineer with experience building web applications and AI-powered workflows
+        using React.js, Spring Boot, NestJS, and PostgreSQL. Skilled in prompt engineering,
+        AI agent workflow design, tool integration, and local-first systems with structured
+        memory and automation.
       </>
     ),
   },
   work: {
-    display: true, // set to false to hide this section
+    display: true,
     title: "Work Experience",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Freelancer",
+        timeframe: "Jul 2025 - Present",
+        role: "Software Engineer",
         achievements: [
           <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
+            Developed a CRM web application using React.js, Redux, Styled Components,
+            Express.js, Prisma ORM, and PostgreSQL.
           </>,
           <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
+            Designed database models and backend APIs for customers, orders, products, and
+            inventory with JWT-based authentication.
+          </>,
+          <>
+            Built quotation, order processing, payment tracking, stock update, dashboard,
+            and reporting workflows, and configured GitHub Actions with Docker pipelines for
+            testing and deployment.
           </>,
         ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "WsoftPro",
+        website: "http://wsoftpro.com",
+        logo: "/images/companies/wsoftpro.jpg",
+        timeframe: "Apr 2025 - Jul 2025",
+        role: "Software Engineer",
         achievements: [
           <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
+            Built an IQC laboratory quality management system for a hospital using React.js and
+            Express.js to support test quality tracking, record management, and lab operations.
           </>,
           <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
+            Developed a document and task management system for a hospital with document signing,
+            approval workflows, and centralized tracking of internal records.
+          </>,
+        ],
+        images: [],
+      },
+      {
+        company: "TinaSoft",
+        website: "https://tinasoft.io",
+        logo: "/images/companies/tinasoft.png",
+        timeframe: "Feb 2025 - Apr 2025",
+        role: "Software Engineer Intern",
+        achievements: [
+          <>
+            Integrated LaoID SSO into LaoSocial using OAuth 2.0 and OpenID Connect.
+          </>,
+          <>
+            Implemented secure authentication flows including token handling, session
+            management, and user onboarding.
+          </>,
+          <>
+            Customized frontend features with React.js and worked with Docker, Nginx,
+            Linux, and CI/CD pipelines.
           </>,
         ],
         images: [],
@@ -155,78 +164,94 @@ const about: About = {
     ],
   },
   studies: {
-    display: true, // set to false to hide this section
-    title: "Studies",
+    display: true,
+    title: "Education",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
-      },
-      {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "Posts and Telecommunications Institute of Technology (PTIT)",
+        website: "https://ptit.edu.vn",
+        logo: "/images/companies/ptit.png",
+        description: <>Engineer of Information Technology.</>,
       },
     ],
   },
   technical: {
-    display: true, // set to false to hide this section
-    title: "Technical skills",
+    display: true,
+    title: "Skills",
     skills: [
       {
-        title: "Figma",
+        title: "Languages",
         description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
+          <>Java, JavaScript, TypeScript, Python, and C/C++.</>
         ),
         tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
+          { name: "Java" },
+          { name: "JavaScript", icon: "javascript" },
+          { name: "TypeScript" },
+          { name: "Python" },
+          { name: "C/C++" },
         ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        title: "Next.js",
+        title: "Frontend",
         description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
+          <>React.js, Next.js, Tailwind CSS, MUI, Redux Toolkit, and production UI workflows.</>
         ),
         tags: [
-          {
-            name: "JavaScript",
-            icon: "javascript",
-          },
-          {
-            name: "Next.js",
-            icon: "nextjs",
-          },
-          {
-            name: "Supabase",
-            icon: "supabase",
-          },
+          { name: "React.js" },
+          { name: "Next.js", icon: "nextjs" },
+          { name: "Tailwind CSS" },
+          { name: "MUI" },
+          { name: "Redux Toolkit" },
         ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
+        images: [],
+      },
+      {
+        title: "Backend & Data",
+        description: (
+          <>
+            Spring Boot, Spring Security, Spring Data JPA, Hibernate, Express.js, NestJS,
+            Prisma ORM, REST APIs, JWT authentication, PostgreSQL, MySQL, and Redis.
+          </>
+        ),
+        tags: [
+          { name: "Spring Boot" },
+          { name: "NestJS" },
+          { name: "Express.js" },
+          { name: "PostgreSQL" },
+          { name: "MySQL" },
+          { name: "Redis" },
         ],
+        images: [],
+      },
+      {
+        title: "AI Engineering",
+        description: (
+          <>
+            Prompt engineering, context management, MCP, tool calling, AI agent workflows,
+            agent orchestration, and RAG.
+          </>
+        ),
+        tags: [
+          { name: "Prompt Engineering" },
+          { name: "MCP" },
+          { name: "Tool Calling" },
+          { name: "Agent Workflows" },
+          { name: "RAG" },
+        ],
+        images: [],
+      },
+      {
+        title: "Tools & Platforms",
+        description: <>Docker, GitHub Actions, CI/CD, Linux, and deployment automation.</>,
+        tags: [
+          { name: "Docker" },
+          { name: "GitHub Actions" },
+          { name: "CI/CD" },
+          { name: "Linux" },
+        ],
+        images: [],
       },
     ],
   },
@@ -235,70 +260,23 @@ const about: About = {
 const blog: Blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about design and tech...",
-  description: `Read what ${person.name} has been up to recently`,
-  // Create new blog posts by adding a new .mdx file to app/blog/posts
-  // All posts will be listed on the /blog route
+  title: "Notes and writing",
+  description: `Writing and technical notes by ${person.name}`,
 };
 
 const work: Work = {
   path: "/work",
-  label: "Work",
+  label: "Projects",
   title: `Projects – ${person.name}`,
-  description: `Design and dev projects by ${person.name}`,
-  // Create new project pages by adding a new .mdx file to app/blog/posts
-  // All projects will be listed on the /home and /work routes
+  description: `Selected engineering projects by ${person.name}`,
 };
 
 const gallery: Gallery = {
   path: "/gallery",
   label: "Gallery",
   title: `Photo gallery – ${person.name}`,
-  description: `A photo collection by ${person.name}`,
-  // Images by https://lorant.one
-  // These are placeholder images, replace with your own
-  images: [
-    {
-      src: "/images/gallery/horizontal-1.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-4.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-3.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-1.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/vertical-2.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-2.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/horizontal-4.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-3.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-  ],
+  description: `Gallery by ${person.name}`,
+  images: [],
 };
 
 export { person, social, newsletter, home, about, blog, work, gallery };

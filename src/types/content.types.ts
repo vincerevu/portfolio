@@ -25,6 +25,8 @@ export type Person = {
   email: string;
   /** IANA time zone location */
   location: IANATimeZone;
+  /** Human-friendly location label for UI */
+  locationLabel?: string;
   /** Languages spoken */
   languages?: string[];
 };
@@ -146,6 +148,10 @@ export interface About extends BasePageConfig {
     experiences: Array<{
       /** Company name */
       company: string;
+      /** Company website */
+      website?: string;
+      /** Company logo */
+      logo?: string;
       /** Timeframe of employment */
       timeframe: string;
       /** Role or job title */
@@ -175,6 +181,10 @@ export interface About extends BasePageConfig {
     institutions: Array<{
       /** Institution name */
       name: string;
+      /** Institution website */
+      website?: string;
+      /** Institution logo */
+      logo?: string;
       /** Description of studies */
       description: React.ReactNode;
     }>;

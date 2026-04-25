@@ -137,25 +137,6 @@ export const Header = () => {
                   </Row>
                 </>
               )}
-              {routes["/education"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="book"
-                      href="/#education"
-                      label="Education"
-                      selected={isProfilePage && currentHash === "#education"}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="book"
-                      href="/#education"
-                      selected={isProfilePage && currentHash === "#education"}
-                    />
-                  </Row>
-                </>
-              )}
               {routes["/work"] && (
                 <>
                   <Row s={{ hide: true }}>
@@ -171,6 +152,44 @@ export const Header = () => {
                       prefixIcon="grid"
                       href="/#projects"
                       selected={isProfilePage && currentHash === "#projects"}
+                    />
+                  </Row>
+                </>
+              )}
+              {routes["/education"] && (
+                <>
+                  <Row s={{ hide: true }}>
+                    <ToggleButton
+                      prefixIcon="rocket"
+                      href="/#skills"
+                      label="Skills"
+                      selected={isProfilePage && currentHash === "#skills"}
+                    />
+                  </Row>
+                  <Row hide s={{ hide: false }}>
+                    <ToggleButton
+                      prefixIcon="rocket"
+                      href="/#skills"
+                      selected={isProfilePage && currentHash === "#skills"}
+                    />
+                  </Row>
+                </>
+              )}
+              {routes["/education"] && (
+                <>
+                  <Row s={{ hide: true }}>
+                    <ToggleButton
+                      prefixIcon="book"
+                      href="/#education"
+                      label="Education"
+                      selected={isProfilePage && currentHash === "#education"}
+                    />
+                  </Row>
+                  <Row hide s={{ hide: false }}>
+                    <ToggleButton
+                      prefixIcon="book"
+                      href="/#education"
+                      selected={isProfilePage && currentHash === "#education"}
                     />
                   </Row>
                 </>
